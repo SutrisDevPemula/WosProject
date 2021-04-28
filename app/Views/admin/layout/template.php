@@ -23,15 +23,15 @@
 <body>
     <div id="app" x-data>
         <div class="main-wrapper">
-            <div class="navbar-bg" style="background-color: #FF0000;"></div>
-            <nav class="navbar navbar-expand-lg main-navbar" style="background-color: #FF0000;">
-                <ul class="navbar-nav mr-3" style="background-color: #FF0000;">
+            <div class="navbar-bg"></div>
+            <nav class="navbar navbar-expand-lg main-navbar">
+                <ul class="navbar-nav mr-3">
                     <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="ion ion-navicon-round"></i></a></li>
                     <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="ion ion-search"></i></a></li>
                 </ul>
             </nav>
 
-            <?= $this->include('user/layout/sidebar'); ?>
+            <?= $this->include('admin/layout/sidebar'); ?>
             <div class="main-content">
                 <?= $this->renderSection('content'); ?>
             </div>
@@ -51,43 +51,6 @@
     <script src="<?= base_url('assets/select2/select2.min.js'); ?>"></script>
     <script src="<?= base_url('assets/alpine.min.js'); ?>"></script>
     <script src="<?= base_url('assets/axios.min.js'); ?>"></script>
-
-
-    <script type="text/javascript">
-        $(document).ready(() => {
-            $('#sKerusakan').select2({
-                placeholder: "Pilih Kerusakan"
-            })
-        });
-        // $('.sKerusakan').select2({
-        //     // placeholder: 'Select an option',
-        //     minimumInputLength: 3,
-        //     ajax: {
-        //         url: '/desKerusakan',
-        //         // axios.get('/desKerusakan'),
-        //         dataType: 'json',
-        //         data: function(params) {
-        //             var query = {
-        //                 search: params.term
-        //             }
-        //             return query;
-        //         },
-        //         processResult: function(data) {
-        //             var hasil = [];
-        //             data.data.forEach(d => {
-        //                 hasil.push({
-        //                     id_kerusakan: d.id_kerusakan,
-        //                     deskripsi: d.deskripsi
-        //                 });
-        //             });
-        //             console.log(hasil);
-        //             return {
-        //                 results: hasil
-        //             }
-        //         }
-        //     }
-        // })
-    </script>
 </body>
 
 </html>

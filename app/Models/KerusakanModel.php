@@ -17,4 +17,43 @@ class KerusakanModel extends Model
 
 	// Dates
 	protected $useTimestamps        = false;
+
+	public function kerusakan()
+	{
+		$data = $this->db->table($this->table)
+			->get()
+			->getResultArray();
+
+		return $data;
+	}
+
+	// SELECT kerusakan.id_kerusakan, kerusakan.deskripsi from kerusakan 
+	// WHERE kerusakan.id_motor in 
+	// (SELECT motor.id_motor from motor 
+	// WHERE motor.jenis_motor = 'mat' AND motor.merk_motor = 'scoopy' AND motor.tipe_motor = 'lna' AND motor.warna_motor = 'bl') 
+
+	public function cariKerusakan($id_motor)
+	{
+		// $id_motor = $this->db->table('motor')
+		// 	->where([
+		// 		'jenis_motor' => $jenis,
+		// 		'merk_motor' => $merk,
+		// 		'tipe_motor' => $tipe,
+		// 		'warna_motor' => $warna
+		// 	])
+		// 	->get()
+		// 	->getResultArray();
+
+		// foreach ($id_motor as $id) {
+		// 	$id_mtr = $id['id_motor'];
+		// }
+
+		// return $id_motor;
+		$kerusakan = $this->db->table($this->table)
+			->where('id_motor', $id_motor)
+			->get()
+			->getResultArray();
+
+		return $kerusakan;
+	}
 }

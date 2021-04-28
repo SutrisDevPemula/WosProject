@@ -21,6 +21,8 @@ class EkspedisiModel extends Model
 	// Dates
 	protected $useTimestamps        = false;
 
-	// Validation
-	protected $validationRules      = [];
+	public function insertEkspedisi($data)
+	{
+		return $this->db->table($this->table)->insert($data);
+	}
 }

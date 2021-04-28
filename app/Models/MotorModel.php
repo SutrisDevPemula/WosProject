@@ -18,4 +18,25 @@ class MotorModel extends Model
 
 	// Dates
 	protected $useTimestamps        = false;
+
+	public function getTypeMotor()
+	{
+		$data = $this->db->table($this->table)
+			->select('tipe_motor')
+			->groupBy('tipe_motor')
+			->get()
+			->getResultArray();
+
+		return $data;
+	}
+	public function getWarnaMotor()
+	{
+		$data = $this->db->table($this->table)
+			->select('warna_motor')
+			->groupBy('warna_motor')
+			->get()
+			->getResultArray();
+
+		return $data;
+	}
 }
