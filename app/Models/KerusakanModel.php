@@ -79,7 +79,7 @@ class KerusakanModel extends Model
 	public function deleteKerusakan($id)
 	{
 		return $this->db->table($this->table)
-			->where('id_kerusakan', $id)
+			->where(['id_kerusakan' => $id,])
 			->delete();
 	}
 }
