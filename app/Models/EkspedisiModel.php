@@ -25,4 +25,33 @@ class EkspedisiModel extends Model
 	{
 		return $this->db->table($this->table)->insert($data);
 	}
+
+	public function getDataEkspedisi()
+	{
+		$data = $this->db->table($this->table)->get()->getResultArray();
+
+		return $data;
+	}
+
+	public function getEkspedisi($id)
+	{
+		$data = $this->db->table($this->table)
+			->where('id_ekspedisi', $id)
+			->get()->getRowArray();
+
+		return $data;
+	}
+
+	public function updateEkspedisi($id, $data)
+	{
+		return $this->db->table($this->table)
+			->update($data, ['id_ekspedisi' => $id]);
+	}
+
+	public function deleteEkspedisi($id)
+	{
+		return $this->db->table($this->table)
+			->where('id_ekspedisi', $id)
+			->delete();
+	}
 }

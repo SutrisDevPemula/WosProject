@@ -5,10 +5,13 @@ namespace App\Controllers;
 use App\Models\A30Model;
 use App\Models\A31aModel;
 use App\Models\A31bModel;
-use App\Models\A32Model;
+use App\Models\A32aModel;
 use App\Models\A33aModel;
 use App\Models\A33bModel;
+use App\Models\A34aModel;
+use App\Models\A34bModel;
 use App\Models\DetailekspedisiModel;
+use App\Models\DetailKerusakanModel;
 use App\Models\EkspedisiModel;
 use App\Models\KerusakanModel;
 use App\Models\MotorModel;
@@ -58,9 +61,11 @@ class BaseController extends Controller
 	protected $A30Model;
 	protected $A31aModel;
 	protected $A31bModel;
-	protected $A32Model;
+	protected $A32aModel;
 	protected $A33aModel;
 	protected $A33bModel;
+	protected $A34aModel;
+	protected $A34bModel;
 	protected $DetailKerusakanModel;
 
 	public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
@@ -83,14 +88,16 @@ class BaseController extends Controller
 		$this->MotorModel = new MotorModel();
 		$this->PenggunaModel = new PenggunaModel();
 		$this->TugasModel = new TugasModel();
-		$this->DetailKerusakanModel = new DetailekspedisiModel();
+		$this->DetailKerusakanModel = new DetailKerusakanModel();
 
 		// tabel view
 		$this->A30Model = new A30Model();
 		$this->A31aModel = new A31aModel();
 		$this->A31bModel = new A31bModel();
-		$this->A32Model = new A32Model();
+		$this->A32aModel = new A32aModel();
 		$this->A33aModel = new A33aModel();
 		$this->A33bModel = new A33bModel();
+		$this->A34aModel = new A34aModel();
+		$this->A34bModel = new A34bModel();
 	}
 }

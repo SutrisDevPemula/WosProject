@@ -27,6 +27,10 @@ class KerusakanModel extends Model
 		return $data;
 	}
 
+	public function insertKerusakan($data)
+	{
+		return $this->db->table($this->table)->insert($data);
+	}
 	// SELECT kerusakan.id_kerusakan, kerusakan.deskripsi from kerusakan 
 	// WHERE kerusakan.id_motor in 
 	// (SELECT motor.id_motor from motor 
@@ -55,5 +59,27 @@ class KerusakanModel extends Model
 			->getResultArray();
 
 		return $kerusakan;
+	}
+
+	public function getKerusakan($id)
+	{
+		$data = $this->db->table($this->table)
+			->where('id_kerusakan', $id)
+			->get()->getRowArray();
+
+		return $data;
+	}
+
+	public function updateKerusakan($id, $data)
+	{
+		return $this->db->table($this->table)
+			->update($data, ['id_kerusakan' => $id]);
+	}
+
+	public function deleteKerusakan($id)
+	{
+		return $this->db->table($this->table)
+			->where('id_kerusakan', $id)
+			->delete();
 	}
 }

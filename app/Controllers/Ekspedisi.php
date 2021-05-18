@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 // use App\Controllers\BaseController;
 
-use App\Models\A32Model;
+use App\Models\A32aModel;
 use App\Models\DetailekspedisiModel;
 use App\Models\EkspedisiModel;
 use App\Models\KerusakanModel;
@@ -82,21 +82,22 @@ class Ekspedisi extends ResourceController
 	}
 
 
-	public function checking($nopol)
+	public function checking($nopol, $tgl)
 	{
-		$A32Model = new A32Model();
+		// dd($nopol);
+		$A32Model = new A32aModel();
 
 		$status = $this->request->getPost('status');
 		$tipe = $this->request->getPost('tipe');
 
-		$data = $this->respond($A32Model->searching('2021-04-01', $nopol, $status, $tipe));
+		$data = $this->respond($A32Model->searching($tgl, $nopol, $status, $tipe));
 
 		return ($data);
 	}
 
 	public function search_ekspedisi($nopol)
 	{
-		$A32Model = new A32Model();
+		$A32Model = new A32aModel();
 
 		$status = $this->request->getJSON()->status;
 		$tipe = $this->request->getJSON()->tipe;

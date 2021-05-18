@@ -17,7 +17,7 @@ class A31aModel extends Model
 		$data = $this->db->table($this->table)
 			->where($where)
 			->get()
-			->getResultArray();
+			->getRowArray();
 
 		return $data;
 	}

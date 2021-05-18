@@ -118,8 +118,9 @@
         tipe: '',
         getData() {
             let url = window.location.pathname
-            let params = url.split("/")[2];
-            axios.get(`/task/${params}/check`).then((res) => {
+            let params1 = url.split("/")[2];
+            let params2 = url.split("/")[3];
+            axios.get(`/task/${params1}/${params2}/check`).then((res) => {
                 this.dataChack = res.data;
             });
             // this.dataChack = data;
@@ -134,13 +135,14 @@
         },
         searcData() {
             let url = window.location.pathname
-            let params = url.split("/")[2];
-            axios.post(`/task/${params}/search`, {
+            let params1 = url.split("/")[2];
+            let params2 = url.split("/")[3];
+            axios.post(`/task/${params1}/${params2}/search`, {
                 tipe: this.tipe,
                 status: this.state
             }).then((res) => {
                 this.dataChack = res.data;
-                console.log(res.data);
+                console.log(res.params);
             })
         }
 
@@ -148,6 +150,7 @@
 
     function test() {
         let url = window.location.pathname
+        console.log(url.split("/")[3]);
         console.log(url.split("/")[2]);
     }
     test()

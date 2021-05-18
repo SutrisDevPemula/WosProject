@@ -48,7 +48,7 @@
                 <form action="get" method="post">
                     <div class="mt-3">
                         <label for="sKerusakan" class="form-label">Kerusakan</label>
-                        <select class="js-data-example-ajax form-select form-select-lg" id="kerusakan" name="kerusakan" style="width: 100%;" x-on:change="$store.defect.getKerusakan($event)">
+                        <select class="js-data-example-ajax form-select form-select-lg" id="kerusakan" name="kerusakan" style="width: 100%; font: size 12px;" x-on:change="$store.defect.getKerusakan($event)">
                             <option>Pilih kerusakan</option>
                             <?php foreach ($kerusakan as $kerusakan) : ?>
                                 <option value="<?= $kerusakan['id_motor']; ?>" x-on:click="$store.defect.getKerusaka($event)"><?= $kerusakan['deskripsi']; ?></option>
@@ -56,16 +56,20 @@
                         </select>
                     </div>
                 </form class="mt-4">
-                <form>
+
+                <form method="POST">
                     <template x-for="(item, index) in $store.defect.dataChack" :key="index">
                         <div class="mt-3">
                             <label for="noPart" class="form-label">Part Number</label>
-                            <!-- <span x-text='item.no_part'> -->
                             <input type="text" class="form-control" id="noPart" readonly x-bind:value="item.no_part">
+                            <input type="text" class="form-control" id="id_kerusakan" name="id_kerusakan" hidden x-bind:value="item.id_kerusakan">
                         </div>
                     </template>
+                    <?php foreach ($data_check as $data_check) : ?>
+                        <input type="text" class="form-control" name="id_detail_ekspedisi" hidden value="<?= $data_check['key']; ?>">
+                    <?php endforeach; ?>
+                    <button type="submit" class="btn btn-success mt-3 btn-sm" style="float: right;" name="tambah" value="<input type=" text" class="form-control mt-1" id="ne" value="<?= $data['no_mesin']; ?>">Tambah</button>
                 </form>
-                <button type="button" class="btn btn-success mt-3 btn-sm" style="float: right;" x-on:click="$store.defect.getKerusakan()">Tambah</button>
             </div>
         </div>
 
@@ -80,11 +84,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>MARK,SCOOPY TYPE 1</td>
-                            <td>86836-K2F-N10ZB</td>
-                            <td><button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></button></td>
-                        </tr>
+                        <?php if (!empty($dtl_kerusakan)) : ?>
+                            <?php foreach ($dtl_kerusakan as $dtl_kerusakan) : ?>
+                                <tr>
+                                    <td><?= $dtl_kerusakan['deskripsi']; ?></td>
+                                    <td><?= $dtl_kerusakan['no_part']; ?></td>
+                                    <td><button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></button></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
                     </tbody>
                 </table>
                 <button type="submit" value="Refresh Page" onClick="goBack()" class="btn btn-outline-secondary text-dark float-end">Kembali</button>
@@ -93,41 +101,6 @@
     </div>
 </section>
 
-<script>
-    Spruce.store('defect', {
-        dataChack: [],
-        kerusakan: '',
-        jenis: '',
-        merk: '',
-        no_part: '',
-        getKerusakan(event) {
-            console.log('ddsddsds');
-            this.kerusakan = event.target.options[event.target.options.selectedIndex].value;
 
-            console.log(this.kerusakan);
-            this.searchData()
-        },
-        searchData() {
-            axios.post('/search_kerusakan', {
-                kerusakan: this.kerusakan
-            }).then((res) => {
-                this.dataChack = res.data;
-                this.no_part = res.data[0].no_part;
-                console.log(res.data[0].no_part);
-            })
-        }
-    })
-    // console.log(Spruce.store('defect', {}));
-
-
-
-    function reloadpage() {
-        location.reload()
-    }
-
-    function goBack() {
-        window.history.back();
-    }
-</script>
 
 <?= $this->endSection(); ?>

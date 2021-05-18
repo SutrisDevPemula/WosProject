@@ -10,30 +10,35 @@ class Task extends BaseController
 
 	public function index()
 	{
+		// dd(date('Y-m-d'));
 		$data = [
-			'ekspedisi' => $this->A30Model->getData('2021-04-01')
+			'ekspedisi' => $this->A30Model->getData(date('Y-m-d'))
 		];
 
 		return view('user/dashboard', $data);
 	}
 
-	public function viewTask($nopol)
+	public function viewTask($nopol, $tgl)
 	{
 		$data = [
-			'dataA' => $this->A31aModel->getData('2021-04-01', $nopol),
-			'dataB' => $this->A31bModel->getDataB('2021-04-01', $nopol)
+			'dataA' => $this->A31aModel->getData($tgl, $nopol),
+			'dataB' => $this->A31bModel->getDataB($tgl, $nopol)
 		];
+
+		// dd($data);
 
 		return view('user/detail_task', $data);
 	}
 
-	public function check($nopol)
+	public function check($nopol, $tgl)
 	{
 		$status = $this->request->getPost('status');
 		$tipe = $this->request->getPost('tipe');
 
+		// dd($tgl);
+
 		$data = [
-			'data_check' => $this->A32Model->searching('2021-04-01', $nopol, $status, $tipe),
+			'data_check' => $this->A32aModel->searching($tgl, $nopol, $status, $tipe),
 			'type' => $this->MotorModel->getTypeMotor(),
 			'warna' => $this->MotorModel->getWarnaMotor(),
 		];
@@ -57,10 +62,31 @@ class Task extends BaseController
 
 	public function defect_check($key)
 	{
+
+		$nf = $this->A33aModel->check_defect($key);
+
+		foreach ($nf as $nf) {
+			$key_kerusakan = $nf['noframe'];
+		}
+
+		if (isset($_POST['save'])) {
+		}
+
+
+		// if (empty($key_kerusakan)) {
 		$data = [
 			'data_check' => $this->A33aModel->check_defect($key),
-			'kerusakan' => $this->KerusakanModel->kerusakan()
+			'kerusakan' => $this->KerusakanModel->kerusakan(),
+			'dtl_kerusakan' => $this->A33bModel->showData($key_kerusakan)
 		];
+		// }
+		// } else {
+		// 	$data = [
+		// 		'data_check' => $this->A33aModel->check_defect($key),
+		// 		'kerusakan' => $this->KerusakanModel->kerusakan()
+		// 	];
+		// }
+
 
 		return view('user/defect_checking', $data);
 	}

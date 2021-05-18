@@ -14,9 +14,20 @@ class DetailekspedisiModel extends Model
 		'no_frame',
 		'no_mesin',
 		'id_tugas',
-		'status_cek'
+		'status_cek',
+		'status_rusak'
 	];
 
 	// Dates
 	protected $useTimestamps        = false;
+
+	public function insertDtlEkspedisi($data)
+	{
+		return $this->db->table($this->table)->insert($data);
+	}
+
+	public function updateData($data, $key)
+	{
+		return $this->db->table($this->table)->update($data, [$this->primaryKey => $key]);
+	}
 }

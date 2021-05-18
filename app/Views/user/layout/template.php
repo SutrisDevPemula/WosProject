@@ -54,39 +54,49 @@
 
 
     <script type="text/javascript">
-        $(document).ready(() => {
-            $('#sKerusakan').select2({
-                placeholder: "Pilih Kerusakan"
-            })
-        });
-        // $('.sKerusakan').select2({
-        //     // placeholder: 'Select an option',
-        //     minimumInputLength: 3,
-        //     ajax: {
-        //         url: '/desKerusakan',
-        //         // axios.get('/desKerusakan'),
-        //         dataType: 'json',
-        //         data: function(params) {
-        //             var query = {
-        //                 search: params.term
-        //             }
-        //             return query;
-        //         },
-        //         processResult: function(data) {
-        //             var hasil = [];
-        //             data.data.forEach(d => {
-        //                 hasil.push({
-        //                     id_kerusakan: d.id_kerusakan,
-        //                     deskripsi: d.deskripsi
-        //                 });
-        //             });
-        //             console.log(hasil);
-        //             return {
-        //                 results: hasil
-        //             }
-        //         }
-        //     }
+        // $(document).ready(() => {
+        // $('#kerusakan').select2({
+
         // })
+        Spruce.store('defect', {
+            dataChack: [],
+            kerusakan: '',
+            jenis: '',
+            merk: '',
+            no_part: '',
+            getKerusakan(event) {
+                console.log('ddsddsds');
+                this.kerusakan = event.target.options[event.target.options.selectedIndex].value;
+
+                console.log(this.kerusakan);
+                this.searchData()
+            },
+            searchData() {
+                axios.post('/search_kerusakan', {
+                    kerusakan: this.kerusakan
+                }).then((res) => {
+                    this.dataChack = res.data;
+                    this.no_part = res.data[0].no_part;
+                    console.log(res.data[0].no_part);
+                })
+            }
+        })
+
+
+        // });
+    </script>
+    <script>
+        // console.log(Spruce.store('defect', {}));
+
+
+
+        function reloadpage() {
+            location.reload()
+        }
+
+        function goBack() {
+            window.history.back();
+        }
     </script>
 </body>
 

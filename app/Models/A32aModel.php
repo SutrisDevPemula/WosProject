@@ -4,9 +4,9 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class A32Model extends Model
+class A32aModel extends Model
 {
-	protected $table                = 'a32';
+	protected $table                = 'a32a';
 
 	public function checking($tgl, $nopol, $status)
 	{

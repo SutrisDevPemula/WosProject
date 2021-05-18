@@ -9,16 +9,13 @@
     <div class="container">
         <div class="row bg-white rounded-3 p-3">
             <div class="col-12">
-                <?php foreach ($dataA as $dataA) : ?>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Nama Ekspedisi : <strong class="float-right me-3"><?= $dataA['nama']; ?></strong></li>
-                        <li class="list-group-item">No Polisi : <strong class="float-right me-3"><?= $dataA['nopol']; ?></strong></li>
-                        <li class="list-group-item">No DO : <strong class="float-right me-3"><?= $dataA['nodo']; ?></strong></li>
-                        <li class="list-group-item">No SP List : <strong class="float-right me-3"><?= $dataA['nosp']; ?></strong></li>
-                        <li class="list-group-item">Tanggal SP List : <strong class="float-right me-3"><?= $dataA['tglsp']; ?></strong></li>
-                        <li class="list-group-item">Tanggal DO : <strong class="float-right me-3"><?= $dataA['tgldo']; ?></strong></li>
-                    </ul>
-                <?php endforeach; ?>
+
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Nama Ekspedisi : <strong class="float-right me-3"><?= $dataA['nama']; ?></strong></li>
+                    <li class="list-group-item">No Polisi : <strong class="float-right me-3"><?= $dataA['nopol']; ?></strong></li>
+                    <li class="list-group-item">Nama Supir : <strong class="float-right me-3"><?= $dataA['supir']; ?></strong></li>
+                </ul>
+
             </div>
         </div>
         <div class="row mt-4 bg-white rounded-3 p-3">
@@ -41,12 +38,18 @@
                     </tbody>
                 </table>
                 <div class="mt-5">
-                    <a href="<?= base_url('task'); ?>" class="btn btn-outline-secondary text-dark">Kembali</a>
-                    <a href="<?= base_url('task/' . $dataA['nopol'] . '/checking'); ?>" class="btn btn-success float-right">Terima</a>
+                    <button type="submit" onclick="goBack()" class="btn btn-outline-secondary text-dark">Kembali</button>
+                    <a href="<?= base_url('/' . 'task/' . $dataA['nopol'] . '/' . $dataA['tanggal'] . '/checking'); ?>" class="btn btn-success float-right">Terima</a>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
 
 <?= $this->endSection(); ?>

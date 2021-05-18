@@ -13,9 +13,26 @@ class TugasModel extends Model
 		'id_ekspedisi',
 		'id_pengguna',
 		'tgl_ekspedisi',
+		'nama_sopir',
 		'status'
 	];
 
 	// Dates
 	protected $useTimestamps        = false;
+
+	public function insertTugas($data)
+	{
+		// return $this->db->table($this->table)->insert($data);
+		return $this->db->table($this->table)->insert($data);
+	}
+
+	public function getId()
+	{
+		$data = $this->db->table($this->table)
+			->orderBy('id_tugas', 'desc')
+			->get()
+			->getRowArray();
+
+		return $data;
+	}
 }

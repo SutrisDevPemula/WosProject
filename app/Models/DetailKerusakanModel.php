@@ -17,8 +17,8 @@ class DetailKerusakanModel extends Model
 	// Dates
 	protected $useTimestamps        = false;
 
-	public function insertKerusakan($data)
+	public function insertDtlKerusakan($data)
 	{
-		return $this->db->table($this->table)->insertBatch($data);
+		return $this->db->table($this->table)->insert($data);
 	}
 }
