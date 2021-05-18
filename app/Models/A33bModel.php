@@ -11,7 +11,7 @@ class A33bModel extends Model
 	public function showData($key)
 	{
 		$data = $this->db->table($this->table)
-			->where('no_mesin', $key)
+			->where('key', $key)
 			->get()
 			->getResultArray();
 

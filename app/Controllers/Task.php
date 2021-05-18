@@ -69,24 +69,33 @@ class Task extends BaseController
 			$key_kerusakan = $nf['noframe'];
 		}
 
-		if (isset($_POST['save'])) {
+		if (isset($_POST['save_nf'])) {
+			$data = [
+				'no_frame' => $this->request->getPost('nf'),
+				'no_mesin' => $this->request->getPost('ne'),
+			];
+
+			$this->DetailEkspedisiModel->updateData($data, $key);
 		}
 
+		if (isset($_POST['tambah'])) {
+			$data = [
+				'id_detail_ekspedisi' => $key,
+				'id_kerusakan' => $this->request->getPost('id_kerusakan')
+			];
 
-		// if (empty($key_kerusakan)) {
+			$this->DetailKerusakanModel->insertDtlKerusakan($data);
+		}
+
+		if (isset($_POST['delete'])) {
+			$id_kerusakan = $this->request->getPost('delete');
+			$this->DetailKerusakanModel->deleteKerusakan($id_kerusakan, $key);
+		}
 		$data = [
 			'data_check' => $this->A33aModel->check_defect($key),
 			'kerusakan' => $this->KerusakanModel->kerusakan(),
-			'dtl_kerusakan' => $this->A33bModel->showData($key_kerusakan)
+			'dtl_kerusakan' => $this->A33bModel->showData($key)
 		];
-		// }
-		// } else {
-		// 	$data = [
-		// 		'data_check' => $this->A33aModel->check_defect($key),
-		// 		'kerusakan' => $this->KerusakanModel->kerusakan()
-		// 	];
-		// }
-
 
 		return view('user/defect_checking', $data);
 	}

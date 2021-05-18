@@ -2,12 +2,12 @@
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
             <!-- <a href="index.html">Stisla Lite</a> -->
-            <img src="<?= base_url('assets/img/honda.jpg'); ?>" alt="" style="width: 5rem;" class="mt-2 mb-5">
+            <img src="assets/img/honda.jpg" alt="" style="width: 5rem;" class="mt-2 mb-5">
         </div>
         <ul class="sidebar-menu mt-5">
             <li class="menu-header">Dashboard</li>
             <li class="active">
-                <a href="index.html"><i class="ion ion-speedometer"></i><span>Dashboard</span></a>
+                <a href="/"><i class="ion ion-speedometer"></i><span>Dashboard</span></a>
             </li>
             <!-- <li class="active">
                 <a href="index.html"><i class="ion ion-speedometer"></i><span>Preview</span></a>

@@ -31,10 +31,10 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
+// $routes->get('/', 'Home::index');
 $routes->get('/ekspedisi', 'Ekspedisi::showEkspedisi');
 $routes->post('/ekspedisi/add', 'Ekspedisi::addEkspedisi');
-$routes->get('/task', 'Task::index');
+$routes->get('/', 'Task::index');
 // $routes->get('/tipe_motor', 'Ekspedisi::search_typeMotor');
 $routes->get('/task/(:any)/(:any)/detail', 'Task::viewTask/$1/$2');
 

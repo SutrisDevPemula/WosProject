@@ -21,4 +21,11 @@ class DetailKerusakanModel extends Model
 	{
 		return $this->db->table($this->table)->insert($data);
 	}
+
+	public function deleteKerusakan($id, $key)
+	{
+		return $this->db->table($this->table)
+			->where(['id_kerusakan' => $id, 'id_detail_ekspedisi' => $key])
+			->delete();
+	}
 }

@@ -22,18 +22,23 @@
                         <div class="accordion-body">
                             <ul class="list-group list-group-flush">
                                 <!-- <input type="text" class="form-control" value="" id=""> -->
-                                <form>
+                                <form action method="post">
                                     <?php foreach ($data_check as $data) : ?>
                                         <li class="list-group-item">Jenis : <?= $data['jenis']; ?></li>
                                         <li class="list-group-item">Merek : <?= $data['merk']; ?></li>
                                         <li class="list-group-item">Tipe : <?= $data['tipe']; ?></li>
                                         <li class="list-group-item">Warna : <?= $data['warna']; ?></li>
-                                        <li class="list-group-item">No. Frame :<input type="text" class="form-control mt-1" id="nf" value="<?= $data['noframe']; ?>"></li>
-                                        <li class="list-group-item">No. Engine : <input type="text" class="form-control mt-1" id="ne" value="<?= $data['no_mesin']; ?>"></li>
+                                        <?php if (empty($data['noframe'])) : ?>
+                                            <li class="list-group-item">No. Frame :<input type="text" class="form-control mt-1" id="nf" value="<?= $data['noframe']; ?>" name="nf"></li>
+                                            <li class="list-group-item">No. Engine : <input type="text" class="form-control mt-1" id="ne" value="<?= $data['no_mesin']; ?>" name="ne"></li>
+                                        <?php else : ?>
+                                            <li class="list-group-item">No. Frame :<input type="text" class="form-control mt-1" id="nf" value="<?= $data['noframe']; ?>" name="nf" readonly></li>
+                                            <li class="list-group-item">No. Engine : <input type="text" class="form-control mt-1" id="ne" value="<?= $data['no_mesin']; ?>" name="ne" readonly></li>
+                                        <?php endif; ?>
                                     <?php endforeach; ?>
                                     <div class="float-end mt-2">
-                                        <button type="submit" class="btn btn-primary "><i class="fas fa-edit"></i></button>
-                                        <button type="submit" class="btn btn-primary "><i class="far fa-save"></i></button>
+                                        <button type="submit" class="btn btn-primary"><i class="fas fa-edit"></i></button>
+                                        <button type="submit" class="btn btn-primary" name="save_nf"><i class="far fa-save"></i></button>
                                     </div>
                                 </form>
                             </ul>
@@ -57,7 +62,7 @@
                     </div>
                 </form class="mt-4">
 
-                <form method="POST">
+                <form method="POST" action="">
                     <template x-for="(item, index) in $store.defect.dataChack" :key="index">
                         <div class="mt-3">
                             <label for="noPart" class="form-label">Part Number</label>
@@ -68,7 +73,7 @@
                     <?php foreach ($data_check as $data_check) : ?>
                         <input type="text" class="form-control" name="id_detail_ekspedisi" hidden value="<?= $data_check['key']; ?>">
                     <?php endforeach; ?>
-                    <button type="submit" class="btn btn-success mt-3 btn-sm" style="float: right;" name="tambah" value="<input type=" text" class="form-control mt-1" id="ne" value="<?= $data['no_mesin']; ?>">Tambah</button>
+                    <button type="submit" class="btn btn-success mt-3 btn-sm" style="float: right;" name="tambah" class="form-control mt-1" id="ne" value="<?= $data['no_mesin']; ?>">Tambah</button>
                 </form>
             </div>
         </div>
@@ -89,7 +94,11 @@
                                 <tr>
                                     <td><?= $dtl_kerusakan['deskripsi']; ?></td>
                                     <td><?= $dtl_kerusakan['no_part']; ?></td>
-                                    <td><button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></button></td>
+                                    <td>
+                                        <form action="" method="post">
+                                            <button type="submit" class="btn btn-danger btn-sm" name="delete" value="<?= $dtl_kerusakan['id_Kerusakan']; ?>"><i class="fas fa-times"></i></button>
+                                        </form>
+                                    </td>
                                 </tr>
                             <?php endforeach; ?>
                         <?php endif; ?>
